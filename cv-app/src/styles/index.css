@@ -1,0 +1,27 @@
+.cv-container{
+    display: flex;
+    justify-content: space-between;
+    flex-direction:row;
+    border: 2px solid black;
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    
+}
+
+.sections{
+    display: flex;
+    justify-content: center;
+    background-color: antiquewhite;
+    flex-direction: column;
+
+    
+}
+.preview{
+    display: flex;
+    justify-content: center;
+    background-color: aquamarine;
+    flex-direction: column;
+
+    
+}
