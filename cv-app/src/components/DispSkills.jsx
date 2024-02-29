@@ -5,22 +5,18 @@ DispSkills.propTypes = {
 }
 export default function DispSkills({skillsobj}){
     //const [disp,setDisp]=useState([]);
-    console.log("skills");
-    console.log(typeof skillsobj);
     console.log(skillsobj);
-    skillsobj.length?console.log("true"): console.log(skillsobj[0]);
-  
     return(
         <>
        {
        skillsobj.map((obj) => {
-            console.log("looping");
+           
     
             return(
-                <>
-                <p>your skill title {obj["sktitle"]}</p>
-                <p>your skill list {obj["sklist"]}</p>
-                </>  
+                <div key={crypto.randomUUID()} className='DispSkills'>
+                <p>{obj["sktitle"]}</p>
+                <p>{obj["sklist"]}</p>
+                </div>  
                 );
     
         })

@@ -1,6 +1,6 @@
 import '../styles/skillstyle.css';
 import propstypes from "prop-types";
-import { useState } from 'react';
+import { useState , useEffect, useRef } from 'react';
 Skills.propTypes = {
     skillsobj: propstypes.array,
     setSkills: propstypes.func,
@@ -8,9 +8,6 @@ Skills.propTypes = {
 }
 
 export default function Skills({ skillsobj, setSkills }) {
-    console.log(typeof skillsobj);
-    console.log("hi");
-    console.log(skillsobj);
     const [dispAddBox, setDispAddBox] = useState([]);
     const [showTitle, setShowTitle] = useState([]);
     const [showAdd, setShowAdd] = useState([<button key={"addbtn"} id="addskillbtn" onClick={handleAdd}>add</button>]);
@@ -18,24 +15,42 @@ export default function Skills({ skillsobj, setSkills }) {
     const [action, setAction] = useState(false);
     const [updatedVal,setUpdatedVal]=useState({title:"",list:""});
     let call_initate=false;
-    let index_now=0;
+    let active=useRef(false);
+    let addnew={};
+    let index_now=useRef(0);
+    let Updated_copy=useRef([]);
+    //useRef is used to keep track of a variable it wont change after the re-render
+    //the use effect is called every time react re-renders
+    useEffect(() => {
+        if (skillsobj) {
+         Updated_copy.current=[];
+         console.log("deleted", skillsobj);
+         permanent_skill(skillsobj);
+         console.log(index_now.current);
+         if (active.current==true){
+            generateinputs(index_now.current-1);
+         }
+         
+        }
+
+       }, [skillsobj]);
     function handleAdd() {
        
-        let addnew = {
+        addnew = {
             sktitle: "",
             sklist: "",
             id: crypto.randomUUID(),
-            index:index_now
+            index:index_now.current
             //update the index to the last index for the new one
         }
        
-        index_now+=1
-        console.log(index_now);
-        skillsobj.push(addnew);
-        setSkills(skillsobj);
-
+        index_now.current=index_now.current+1
+        console.log("here",index_now.current);
+        console.log(addnew.index);
+        setSkills(prev=>[...prev,addnew]);
+        active.current=true;
         setAction("dispAddBox");
-        return (generateinputs(addnew.index));
+        //return (generateinputs(addnew.index));
     }
 
     function handleChange(e) {
@@ -56,11 +71,11 @@ export default function Skills({ skillsobj, setSkills }) {
 
     }
 
-    function permanent_skill() {
+    function permanent_skill(skills) {
         
+        console.log("updated inside permanent");
+        console.log(skills);
         setShowTitle([]);
-        console.log("insinde");
-        console.log(skillsobj);
         if (skillsobj.length>0){
         skillsobj.forEach((obj) => {
             let disp=(<div key={crypto.randomUUID()} className="skillDisplay">
@@ -69,7 +84,7 @@ export default function Skills({ skillsobj, setSkills }) {
             
             <div>
                 <button onClick={(e) => edit_skill(obj["index"])}>edit</button>
-                <button onClick={(e) => delete_skill(obj["index"])}>Delete</button>
+                <button id={obj["index"]} onClick={(e) =>removeItem(obj["index"])}>Delete</button>
             </div>
         </div>);
             setShowTitle((prev)=>{
@@ -80,19 +95,21 @@ export default function Skills({ skillsobj, setSkills }) {
             });
         });
     }
-    console.log(showTitle);
+   
     }
 
     function generateinputs(idx) {
-
+        console.log(idx,skillsobj);
         setDispAddBox((prev) => {
             let newele = skillsobj.map((obj) => {
                 // let labels=["sktitle","sklist","id",'index'];
+                // <button id="add_permanent_skill" onClick={(e) =>{ setAction(false); permanent_skill(); }}>add now</button>
+
                 if (idx == obj["index"]) {
                     return (<>
                         <input key={crypto.randomUUID()} data-index={obj["index"]} id={obj["sktitle"]} placeholder={"sktitle"} type="text" value={obj["index"]["sktitle"]} onChange={(e) => { handleChange(e) }} />
                         <textarea data-index={obj["index"]} id={obj["sklist"]} placeholder={"sklist"} value={obj["index"]["sklist"]} onChange={(e) => { handleChange(e) }} />
-                        <button id="add_permanent_skill" onClick={(e) =>{ setAction(false); permanent_skill(); }}>add now</button>
+                        <button id="add_permanent_skill" onClick={(e) =>{ setAction(false); }}>add now</button>
                     </>
                     );
                 }
@@ -104,7 +121,7 @@ export default function Skills({ skillsobj, setSkills }) {
             ]
             );
         })
-
+        active.current=false;
 
     }
     function edit_skill(idx) {
@@ -124,58 +141,18 @@ export default function Skills({ skillsobj, setSkills }) {
         });
         
         setShowEdit([dispedit]);
-        console.log("edit"); 
+        
     }
     //here make the delete work tomorrow
-    const delete_skill = (index) => {
-        let i=0;
-        let idx=0;
-        skillsobj.map((obj)=>{
-            if (index == obj["index"]) {
-                idx=i;
-            }
-            i+=1
-            
-        }
-        )
-        //make direct changes on skillsonj other than deleteobj
-        /*
-        console.log(idx);
-        let deleteobj=[...skillsobj];
-        deleteobj.splice(idx, 1);
-        console.log('not up');
-        console.log(deleteobj);
-        setSkills((prev)=>{
-            return(deleteobj)});
-            */
-        console.log(idx);
-        skillsobj.splice(idx,1);
-        console.log('not up');
-        console.log(skillsobj);
-        setSkills((prev)=>{
-            return(skillsobj)});
-           
-        //the delete is not disp crtly if the last ele is 
-        //deleted so we make this
-        //the above code works for just delete
-        permanent_skill();
-        console.log(skillsobj);
-      }
-    function dupe(){
-      
+    const removeItem = (id) => {
+        console.log("removeitem");
+        console.log(id);
+        setSkills(prev => prev.filter((el) => el.index !== id));
+        console.log(Updated_copy.current);// filter by id 
        
-            let addnew = {
-                sktitle: "",
-                sklist: "",
-                id: crypto.randomUUID(),
-                index:index_now
-                //update the index to the last index for the new one
-            }
-           
-            index_now+=1
-            skillsobj.push(addnew);
-            setSkills(skillsobj);
-    }
+        
+         
+    };
     
     function initia_update(idx){
         let vals=updatedVal;
@@ -208,7 +185,7 @@ export default function Skills({ skillsobj, setSkills }) {
         Updateskills[idx]["sklist"] = updatedVal["list"];
 
         setSkills(Updateskills);
-        permanent_skill();
+       
         console.log("called permanent skills");
         setAction(false);
         call_initate=false;
