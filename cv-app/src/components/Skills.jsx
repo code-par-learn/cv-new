@@ -14,7 +14,6 @@ export default function Skills({ skillsobj, setSkills }) {
     const [showEdit, setShowEdit] = useState([]);
     const [action, setAction] = useState(false);
     const [updatedVal,setUpdatedVal]=useState({title:"",list:""});
-    let call_initate=false;
     let active=useRef(false);
     let addnew={};
     let index_now=useRef(0);
@@ -24,9 +23,7 @@ export default function Skills({ skillsobj, setSkills }) {
     useEffect(() => {
         if (skillsobj) {
          Updated_copy.current=[];
-         console.log("deleted", skillsobj);
          permanent_skill(skillsobj);
-         console.log(index_now.current);
          if (active.current==true){
             generateinputs(index_now.current-1);
          }
@@ -44,13 +41,11 @@ export default function Skills({ skillsobj, setSkills }) {
             //update the index to the last index for the new one
         }
        
-        index_now.current=index_now.current+1
-        console.log("here",index_now.current);
-        console.log(addnew.index);
+        index_now.current=index_now.current+1;
         setSkills(prev=>[...prev,addnew]);
         active.current=true;
         setAction("dispAddBox");
-        //return (generateinputs(addnew.index));
+       
     }
 
     function handleChange(e) {
@@ -58,25 +53,17 @@ export default function Skills({ skillsobj, setSkills }) {
 
         let Index = e.target.getAttribute("data-index");
 
-        //changeskills[Number(Index)][e.target.placeholder] = e.target.value;
         changeskills.map((obj) => {
             if (Number(Index) == obj["index"]) {
                 obj[e.target.placeholder]=e.target.value;
             }
         })
         setSkills(changeskills);
-        
-        console.log(skillsobj)
-        
-
-    }
+}
 
     function permanent_skill(skills) {
-        
-        console.log("updated inside permanent");
-        console.log(skills);
         setShowTitle([]);
-        if (skillsobj.length>0){
+        if (skills.length>0){
         skillsobj.forEach((obj) => {
             let disp=(<div key={crypto.randomUUID()} className="skillDisplay">
             
@@ -99,7 +86,6 @@ export default function Skills({ skillsobj, setSkills }) {
     }
 
     function generateinputs(idx) {
-        console.log(idx,skillsobj);
         setDispAddBox((prev) => {
             let newele = skillsobj.map((obj) => {
                 // let labels=["sktitle","sklist","id",'index'];
@@ -139,57 +125,50 @@ export default function Skills({ skillsobj, setSkills }) {
                 );
             }
         });
-        
+        initia_update(idx)
         setShowEdit([dispedit]);
         
     }
     //here make the delete work tomorrow
     const removeItem = (id) => {
-        console.log("removeitem");
-        console.log(id);
-        setSkills(prev => prev.filter((el) => el.index !== id));
-        console.log(Updated_copy.current);// filter by id 
-       
-        
-         
+        setSkills(prev => prev.filter((el) => el.index !== id));         
     };
     
     function initia_update(idx){
         let vals=updatedVal;
-        vals["title"]=skillsobj[idx]["sktitle"];
-        vals["list"]=skillsobj[idx]["sklist"];
+        skillsobj.map((obj) => {
+            if (idx == obj["index"]) {
+                vals["title"]=obj["sktitle"];
+                vals["list"]=obj["sklist"];
+            }
+        });
         setUpdatedVal(prev => ({
+            
             ...vals
           }));
-        console.log(updatedVal);
-        call_initate=true;
     }
     const update_val=(idx,id,val)=>{
-        if (call_initate==false){
-            initia_update(idx);
-        }
-
+        // iam changing the initia_update to be called inside 
+        // the edit function itself avoid duplication while updating
         let vals=updatedVal;
         vals[id]=val;
         setUpdatedVal(prev => ({
             ...prev,
             ...vals
           }));
-        
-        console.log(updatedVal);
     }
-    function update_skill(idx){
-        console.log("hey ther");
-        let Updateskills = [...skillsobj];
-        Updateskills[idx]["sktitle"] = updatedVal["title"];
-        Updateskills[idx]["sklist"] = updatedVal["list"];
-
-        setSkills(Updateskills);
-       
-        console.log("called permanent skills");
+    function update_skill(idx){  
+        skillsobj.map((obj) => {
+            if (idx == obj["index"]) {
+                obj["sktitle"] = updatedVal["title"];
+                obj["sklist"] = updatedVal["list"];
+            }
+        })
+        let changeskills=[...skillsobj]
+        
+        //******problem is here it is updating but not the display in the displayskills and in the disptitle
+        setSkills(changeskills);
         setAction(false);
-        call_initate=false;
-
     }
     function render_disp() {
 
@@ -219,9 +198,6 @@ export default function Skills({ skillsobj, setSkills }) {
                 </>
             );
         }
-        
-
-
     }
 
     return (action == false ? render_disp() : render_disp());

@@ -1,11 +1,10 @@
-import { useState} from 'react';
+import '../styles/dispSkillsSytles.css';
 import propstypes from "prop-types";
 DispSkills.propTypes = {
     skillsobj: propstypes.array,
 }
 export default function DispSkills({skillsobj}){
     //const [disp,setDisp]=useState([]);
-    console.log(skillsobj);
     return(
         <>
        {
