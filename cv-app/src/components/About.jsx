@@ -32,7 +32,7 @@ export default function About({aboutobj,setAbout}){
             </>
         );
     }
-    let inputs=["name","email","phone","website","linkedin","github","leetcode"];
+    let inputs=["name","email","phone","linkedin"];
     
     return(
         <>

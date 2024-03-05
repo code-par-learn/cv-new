@@ -13,19 +13,16 @@ export default function Skills({ skillsobj, setSkills }) {
     const [showAdd, setShowAdd] = useState([<button key={"addbtn"} id="addskillbtn" onClick={handleAdd}>add</button>]);
     const [showEdit, setShowEdit] = useState([]);
     const [action, setAction] = useState(false);
-    const [updatedVal,setUpdatedVal]=useState({title:"",list:""});
+    const [temp,setTemp]=useState({title:"",list:""});
     let active=useRef(false);
-    let addnew={};
     let index_now=useRef(0);
-    let Updated_copy=useRef([]);
     //useRef is used to keep track of a variable it wont change after the re-render
     //the use effect is called every time react re-renders
     useEffect(() => {
         if (skillsobj) {
-         Updated_copy.current=[];
-         permanent_skill(skillsobj);
+         update_showtitle(skillsobj);
          if (active.current==true){
-            generateinputs(index_now.current-1);
+            open_addIp(index_now.current-1);
          }
          
         }
@@ -33,7 +30,7 @@ export default function Skills({ skillsobj, setSkills }) {
        }, [skillsobj]);
     function handleAdd() {
        
-        addnew = {
+        let addnew = {
             sktitle: "",
             sklist: "",
             id: crypto.randomUUID(),
@@ -61,7 +58,7 @@ export default function Skills({ skillsobj, setSkills }) {
         setSkills(changeskills);
 }
 
-    function permanent_skill(skills) {
+    function update_showtitle(skills) {
         setShowTitle([]);
         if (skills.length>0){
         skillsobj.forEach((obj) => {
@@ -85,17 +82,15 @@ export default function Skills({ skillsobj, setSkills }) {
    
     }
 
-    function generateinputs(idx) {
+    function open_addIp(idx) {
         setDispAddBox((prev) => {
             let newele = skillsobj.map((obj) => {
-                // let labels=["sktitle","sklist","id",'index'];
-                // <button id="add_permanent_skill" onClick={(e) =>{ setAction(false); permanent_skill(); }}>add now</button>
-
                 if (idx == obj["index"]) {
                     return (<>
                         <input key={crypto.randomUUID()} data-index={obj["index"]} id={obj["sktitle"]} placeholder={"sktitle"} type="text" value={obj["index"]["sktitle"]} onChange={(e) => { handleChange(e) }} />
                         <textarea data-index={obj["index"]} id={obj["sklist"]} placeholder={"sklist"} value={obj["index"]["sklist"]} onChange={(e) => { handleChange(e) }} />
-                        <button id="add_permanent_skill" onClick={(e) =>{ setAction(false); }}>add now</button>
+                        <button id="cancel_btn" onClick={(e)=>{removeItem(idx); setAction(false)}} >Cancel</button>
+                        <button id="add_update_showtitle" onClick={(e) =>{ setAction(false); }}>add now</button>
                     </>
                     );
                 }
@@ -117,15 +112,15 @@ export default function Skills({ skillsobj, setSkills }) {
                 return (
                     <>
 
-                        <input key={crypto.randomUUID()} data-index={obj["index"]} id="title"  type="text"  defaultValue={obj["sktitle"]} onChange={(e)=>{update_val(idx,e.target.id,e.target.value)}} />
-                        <textarea data-index={obj["index"]}  id="list"  defaultValue={obj["sklist"]} onChange={(e)=>{update_val(idx,e.target.id,e.target.value)}}    />
+                        <input key={crypto.randomUUID()} data-index={obj["index"]} id="title"  type="text"  defaultValue={obj["sktitle"]} onChange={(e)=>{update_temp(e.target.id,e.target.value)}} />
+                        <textarea data-index={obj["index"]}  id="list"  defaultValue={obj["sklist"]} onChange={(e)=>{update_temp(e.target.id,e.target.value)}}    />
                         <button  onClick={(e)=>{setAction(false)}} >cancel</button>
                         <button onClick={(e)=>{update_skill(idx)}} >update</button>
                     </>
                 );
             }
         });
-        initia_update(idx)
+        set_temp(idx)
         setShowEdit([dispedit]);
         
     }
@@ -134,25 +129,25 @@ export default function Skills({ skillsobj, setSkills }) {
         setSkills(prev => prev.filter((el) => el.index !== id));         
     };
     
-    function initia_update(idx){
-        let vals=updatedVal;
+    function set_temp(idx){
+        let vals=temp;
         skillsobj.map((obj) => {
             if (idx == obj["index"]) {
                 vals["title"]=obj["sktitle"];
                 vals["list"]=obj["sklist"];
             }
         });
-        setUpdatedVal(prev => ({
+        setTemp(prev => ({
             
             ...vals
           }));
     }
-    const update_val=(idx,id,val)=>{
-        // iam changing the initia_update to be called inside 
+    const update_temp=(id,val)=>{
+        // iam changing the set_temp to be called inside 
         // the edit function itself avoid duplication while updating
-        let vals=updatedVal;
+        let vals=temp;
         vals[id]=val;
-        setUpdatedVal(prev => ({
+        setTemp(prev => ({
             ...prev,
             ...vals
           }));
@@ -160,8 +155,8 @@ export default function Skills({ skillsobj, setSkills }) {
     function update_skill(idx){  
         skillsobj.map((obj) => {
             if (idx == obj["index"]) {
-                obj["sktitle"] = updatedVal["title"];
-                obj["sklist"] = updatedVal["list"];
+                obj["sktitle"] = temp["title"];
+                obj["sklist"] = temp["list"];
             }
         })
         let changeskills=[...skillsobj]

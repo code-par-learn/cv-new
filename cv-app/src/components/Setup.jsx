@@ -1,12 +1,14 @@
 import '../styles/index.css';
 import Sections from "./Sections";
 import Preview from './Preview';
-import DispSkills from "./DispSkills";
 import { useState } from 'react';
 
 export default function Setup(){
-    const [about,setAbout]=useState({name:"",email:"",phone:"",website:"",linkedin:"",github:"",leetcode:""});
+    const [about,setAbout]=useState({name:"",email:"",phone:"",linkedin:"",});
     const [skills,setSkills]=useState([]);
+    const [profExp,setProfExp]=useState([]);
+    const [edu,setEdu]=useState([]);
+    
     return(
         <>
         <h1>CV App</h1>
@@ -14,12 +16,13 @@ export default function Setup(){
         <div  className='sections'>
             Sections
            <Sections about={about} setAbout={setAbout} 
-                     skills={skills} setSkills={setSkills} />
+                     skills={skills} setSkills={setSkills} 
+                     profExp={profExp} setProfExp={setProfExp}/>
         </div>
         <div  className='preview' >
             Preview
-            <Preview about={about}  />
-            <DispSkills skillsobj={skills} />
+            <Preview about={about}  skillsobj={skills} profExpobj={profExp}/>
+            
             
         </div>
         </div>
