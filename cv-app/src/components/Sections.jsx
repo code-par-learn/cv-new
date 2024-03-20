@@ -4,25 +4,39 @@ import About from "./About";
 import propstypes from "prop-types";
 import Skills from "./Skills";
 import ProfExp from "./ProfExp";
-
+import Education from "./Education";
 Sections.propTypes={
     about:propstypes.object,
     setAbout:propstypes.func,
     skills:propstypes.array,
     setSkills:propstypes.func,
     profExp:propstypes.array,
-    setProfExp:propstypes.func
+    setProfExp:propstypes.func,
+    edu:propstypes.array,
+    setEdu:propstypes.func,
+    skillIdx:propstypes.number,
+    setSkillIdx:propstypes.func,
+    profExpIdx:propstypes.number,
+    setProfExpIdx:propstypes.func,
+    eduIdx:propstypes.number,
+    setEduIdx:propstypes.func,
 }
-export default function Sections({about,setAbout,skills,setSkills, profExp, setProfExp}){
+//{about,setAbout,skillIdx,setSkillIdx,skills,setSkills, profExp, setProfExp,edu,setEdu}
+export default function Sections(props){
+    
     return(
         <>
     
-        <About aboutobj={about} setAbout={setAbout}/>
+        <About aboutobj={props.about} setAbout={props.setAbout} />
         <Skills 
-        skillsobj={skills}
-        setSkills={setSkills}
+        skillsobj={props.skills}
+        setSkills={props.setSkills}
+        skillIdx={props.skillIdx} setSkillIdx={props.setSkillIdx}
         />
-        <ProfExp  profExpobj={profExp} setProfExp={setProfExp}/>
-        </>
+        <ProfExp  profExpobj={props.profExp} setProfExp={props.setProfExp}
+                  profExpIdx={props.profExpIdx}  setProfExpIdx={props.setProfExpIdx}/>
+        <Education eduobj={props.edu} setEdu={props.setEdu}
+                   eduIdx={props.eduIdx} setEduIdx={props.setEduIdx} />
+      </>
     );
 }

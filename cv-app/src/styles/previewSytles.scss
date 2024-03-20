@@ -1,0 +1,93 @@
+
+
+@mixin fontstyle1 {
+   
+        font-size: 17px;
+        font-family: monospace;
+        font-weight: 600;
+    
+}
+
+/* we have to style the preview of disp professional exp for now remainning we will see later */
+div#preview {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    font-size: 17px;
+    padding: 10px;
+    h5 {
+        font-size: 20px;
+        margin: 4px;
+    }
+    div#aboutIn {
+        display: flex;
+        flex-direction: column;
+        div#info {
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            
+            gap: 25px;
+        }
+    }
+    div#skillsBox {
+        .DispSkills {
+            display: flex;
+            gap: 10px;
+            .dispSkillTitle{
+                @include fontstyle1();
+            }
+        }
+
+    }
+    div#profExpBox {
+        .DispProfExp {
+            display: flex;
+            flex-direction: column;
+            .jobInfo {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                .titleside1 {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 10px;
+                }
+                .titleside2 {
+                    display: flex;
+                    flex-direction: row;
+                    gap: 10px;
+                }
+            }
+            .JobDescp {
+                max-width: 439px;
+                margin: 0px;
+            }
+        }
+        
+    }
+    div#eduBox {
+        display: flex;
+        flex-direction: column;
+        .DispEdu {
+            display: flex;
+            flex-direction: column;
+            p{
+                margin:5px;
+            }
+            .titleside1 {
+                display: flex;
+                align-content: center;
+                
+                align-items: center;
+            }
+            .titleside2 {
+                display: flex;
+                align-content: center;
+                /* justify-content: center; */
+                align-items: center;
+                gap: 10px;
+            }
+        }
+    }
+}

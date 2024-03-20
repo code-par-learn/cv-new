@@ -4,10 +4,12 @@ import { useState , useEffect, useRef } from 'react';
 Skills.propTypes = {
     skillsobj: propstypes.array,
     setSkills: propstypes.func,
+    skillIdx:propstypes.number,
+    setSkillIdx:propstypes.func,
 
 }
 
-export default function Skills({ skillsobj, setSkills }) {
+export default function Skills({ skillsobj, setSkills ,skillIdx,setSkillIdx }) {
     const [dispAddBox, setDispAddBox] = useState([]);
     const [showTitle, setShowTitle] = useState([]);
     const [showAdd, setShowAdd] = useState([<button key={"addbtn"} id="addskillbtn" onClick={handleAdd}>add</button>]);
@@ -15,31 +17,40 @@ export default function Skills({ skillsobj, setSkills }) {
     const [action, setAction] = useState(false);
     const [temp,setTemp]=useState({title:"",list:""});
     let active=useRef(false);
-    let index_now=useRef(0);
+  
+    
+    
     //useRef is used to keep track of a variable it wont change after the re-render
     //the use effect is called every time react re-renders
     useEffect(() => {
         if (skillsobj) {
          update_showtitle(skillsobj);
          if (active.current==true){
-            open_addIp(index_now.current-1);
+            
+            open_addIp(skillIdx-1);
+          
          }
+         
          
         }
 
        }, [skillsobj]);
     function handleAdd() {
-       
+       console.log(skillIdx);
         let addnew = {
             sktitle: "",
             sklist: "",
             id: crypto.randomUUID(),
-            index:index_now.current
-            //update the index to the last index for the new one
+            index:skillIdx
+           
+            
         }
        
-        index_now.current=index_now.current+1;
-        setSkills(prev=>[...prev,addnew]);
+       
+       setSkillIdx(skillIdx+=1); 
+      
+       setSkills(prev=>[...prev,addnew]);
+      
         active.current=true;
         setAction("dispAddBox");
        
@@ -83,7 +94,7 @@ export default function Skills({ skillsobj, setSkills }) {
     }
 
     function open_addIp(idx) {
-        setDispAddBox((prev) => {
+       setDispAddBox((prev) => {
             let newele = skillsobj.map((obj) => {
                 if (idx == obj["index"]) {
                     return (<>
@@ -124,7 +135,7 @@ export default function Skills({ skillsobj, setSkills }) {
         setShowEdit([dispedit]);
         
     }
-    //here make the delete work tomorrow
+    
     const removeItem = (id) => {
         setSkills(prev => prev.filter((el) => el.index !== id));         
     };
@@ -161,7 +172,6 @@ export default function Skills({ skillsobj, setSkills }) {
         })
         let changeskills=[...skillsobj]
         
-        //******problem is here it is updating but not the display in the displayskills and in the disptitle
         setSkills(changeskills);
         setAction(false);
     }

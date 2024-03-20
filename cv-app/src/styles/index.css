@@ -3,25 +3,36 @@
     justify-content: space-between;
     flex-direction:row;
     border: 2px solid black;
-    padding: 10px;
+    /*padding: 10px;
     padding-left: 30px;
-    padding-right: 30px;
+    padding-right: 30px;*/
     gap: 10px;
 }
 
 .sections{
     display: flex;
-    justify-content: center;
     background-color: antiquewhite;
     flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 20px;
+    margin-top: 10px;
 
     
 }
-.preview{
+
+.previewBox{
     display: flex;
-    justify-content: center;
     background-color: aquamarine;
     flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-top: 10px;
 
     
 }

@@ -1,55 +1,54 @@
 import propstypes from "prop-types";
 import { useState , useEffect, useRef } from 'react';
-ProfExp.propTypes = {
-    profExpobj: propstypes.array,
-    setProfExp: propstypes.func,
+Education.propTypes = {
+    eduobj: propstypes.array,
+    setEdu: propstypes.func,
 
 }
-export default function ProfExp({profExpobj,setProfExp,profExpIdx,setProfExpIdx}){
+export default function Education({eduobj,setEdu,eduIdx,setEduIdx}){
+   
     const [dispAddBox, setDispAddBox] = useState([]);
     const [showTitle, setShowTitle] = useState([]);
     const [showAdd, setShowAdd] = useState([<button key={"addbtn"} id="addskillbtn" onClick={handleAdd}>add</button>]);
     const [showEdit, setShowEdit] = useState([]);
     const [action, setAction] = useState(false);
-    const [temp,setTemp]=useState({compName: "",positionTitle: "",startDate:"",endDate:"",location:"",description:""});
+    const [temp,setTemp]=useState({institution: "",degree: "",startDate:"",endDate:"",region:""});
     let active=useRef(false);
-    
-    
-
+   
     useEffect(() => {
-        if (profExpobj) {
-         update_showtitle(profExpobj);
+        if (eduobj) {
+         update_showtitle(eduobj);
          if (active.current==true){
-          
-            open_addIp(profExpIdx-1);
+           
+            open_addIp(eduIdx-1);
          }
          
         }
 
-       }, [profExpobj]);
+       }, [eduobj]);
+
+       //institution: "",degree: "",startDate:"",endDate:"",region:""
        function handleAdd() {
        
         let addnew = {
-            compName: "",
-            positionTitle: "",
+            institution:"",
+            degree:"",
             startDate:"",
             endDate:"",
-            location:"",
-            description:"",
+            region:"",
             id: crypto.randomUUID(),
-            index:profExpIdx
+            index:eduIdx
             
-           
         }
-        setProfExpIdx(profExpIdx+=1)
-       
-        setProfExp(prev=>[...prev,addnew]);
+        setEduIdx(eduIdx+=1)
+        
+        setEdu(prev=>[...prev,addnew]);
         active.current=true;
         setAction("dispAddBox");
        
     }
     function handleChange(e) {
-        let changeskills = [...profExpobj];
+        let changeskills = [...eduobj];
 
         let Index = e.target.getAttribute("data-index");
 
@@ -58,16 +57,17 @@ export default function ProfExp({profExpobj,setProfExp,profExpIdx,setProfExpIdx}
                 obj[e.target.placeholder]=e.target.value;
             }
         })
-        setProfExp(changeskills);
+        setEdu(changeskills);
 }
 
     function update_showtitle(skills) {
         setShowTitle([]);
         if (skills.length>0){
-        profExpobj.forEach((obj) => {
+            //institution: "",degree: "",startDate:"",endDate:"",region:""
+        eduobj.forEach((obj) => {
             let disp=(<div key={crypto.randomUUID()} className="skillDisplay">
             
-            <p key={crypto.randomUUID()} id={obj["index"]}>{obj["compName"]}</p>
+            <p key={crypto.randomUUID()} id={obj["index"]}>{obj["degree"]}</p>
             
             <div>
                 <button onClick={(e) => edit_profExp(obj["index"])}>edit</button>
@@ -86,18 +86,17 @@ export default function ProfExp({profExpobj,setProfExp,profExpIdx,setProfExpIdx}
     }
 
     function open_addIp(idx) {
-        
+        //institution: "",degree: "",startDate:"",endDate:"",region:"" //institution: "",degree: "",startDate:"",endDate:"",region:""
         setDispAddBox((prev) => {
-            let newele = profExpobj.map((obj) => {
+            let newele = eduobj.map((obj) => {
                 if (idx == obj["index"]) {
-                    return (<>
-                        <input key={crypto.randomUUID()} data-index={obj["index"]} id={obj["compName"]} placeholder={"compName"} type="text" value={obj["index"]["compName"]} onChange={(e) => { handleChange(e) }} />
-                        <input key={crypto.randomUUID()} data-index={obj["index"]} id={obj["positionTitle"]} placeholder={"positionTitle"} type="text" value={obj["index"]["positionTitle"]} onChange={(e) => { handleChange(e) }} />
+                    return (<> 
+                        <input key={crypto.randomUUID()} data-index={obj["index"]} id={obj["institution"]} placeholder={"institution"} type="text" value={obj["index"]["institution"]} onChange={(e) => { handleChange(e) }} />
+                        <input key={crypto.randomUUID()} data-index={obj["index"]} id={obj["degree"]} placeholder={"degree"} type="text" value={obj["index"]["degree"]} onChange={(e) => { handleChange(e) }} />
                         <input key={crypto.randomUUID()} data-index={obj["index"]} id={obj["startDate"]} placeholder={"startDate"} type="text" value={obj["index"]["startDate"]} onChange={(e) => { handleChange(e) }} />
                         <input key={crypto.randomUUID()} data-index={obj["index"]} id={obj["endDate"]} placeholder={"endDate"} type="text" value={obj["index"]["endDate"]} onChange={(e) => { handleChange(e) }} />
-                        <input key={crypto.randomUUID()} data-index={obj["index"]} id={obj["location"]} placeholder={"location"} type="text" value={obj["index"]["location"]} onChange={(e) => { handleChange(e) }} />
+                        <input key={crypto.randomUUID()} data-index={obj["index"]} id={obj["region"]} placeholder={"region"} type="text" value={obj["index"]["region"]} onChange={(e) => { handleChange(e) }} />
                         
-                        <textarea data-index={obj["index"]} id={obj["description"]} placeholder={"description"} value={obj["index"]["description"]} onChange={(e) => { handleChange(e) }} />
                         <button id="cancel_btn" onClick={(e)=>{removeItem(idx); setAction(false)}} >Cancel</button>
                         <button id="add_update_showtitle" onClick={(e) =>{ setAction(false); }}>add now</button>
                     </>
@@ -115,19 +114,17 @@ export default function ProfExp({profExpobj,setProfExp,profExpIdx,setProfExpIdx}
 
     }
     function edit_profExp(idx) {
-        setAction("showEdit");
-        let dispedit=profExpobj.map((obj) => {
+        setAction("showEdit");                                                  //institution: "",degree: "",startDate:"",endDate:"",region:""
+        let dispedit=eduobj.map((obj) => {
             if (idx == obj["index"]) {
                 return (
                     <>
-                        <input key={crypto.randomUUID()} data-index={obj["index"]} id="compName"  type="text" defaultValue={obj["compName"]} onChange={(e)=>{update_temp(e.target.id,e.target.value)}} />
-                        <input key={crypto.randomUUID()} data-index={obj["index"]} id="positionTitle" type="text" defaultValue={obj["positionTitle"]} onChange={(e)=>{update_temp(e.target.id,e.target.value)}} />
+                        <input key={crypto.randomUUID()} data-index={obj["index"]} id="institution"  type="text" defaultValue={obj["institution"]} onChange={(e)=>{update_temp(e.target.id,e.target.value)}} />
+                        <input key={crypto.randomUUID()} data-index={obj["index"]} id="degree" type="text" defaultValue={obj["degree"]} onChange={(e)=>{update_temp(e.target.id,e.target.value)}} />
                         <input key={crypto.randomUUID()} data-index={obj["index"]} id="startDate" type="text" defaultValue={obj["startDate"]} onChange={(e)=>{update_temp(e.target.id,e.target.value)}} />
                         <input key={crypto.randomUUID()} data-index={obj["index"]} id="endDate"  type="text" defaultValue={obj["endDate"]} onChange={(e)=>{update_temp(e.target.id,e.target.value)}} />
-                        <input key={crypto.randomUUID()} data-index={obj["index"]} id="location"  type="text" defaultValue={obj["location"]} onChange={(e)=>{update_temp(e.target.id,e.target.value)}} />
+                        <input key={crypto.randomUUID()} data-index={obj["index"]} id="region"  type="text" defaultValue={obj["region"]} onChange={(e)=>{update_temp(e.target.id,e.target.value)}} />
                         
-                        <textarea data-index={obj["index"]} id="description"  defaultValue={obj["description"]} onChange={(e)=>{update_temp(e.target.id,e.target.value)}} />
-
                         <button  onClick={(e)=>{setAction(false)}} >cancel</button>
                         <button onClick={(e)=>{update_profExp(idx)}} >update</button>
                     </>
@@ -140,19 +137,18 @@ export default function ProfExp({profExpobj,setProfExp,profExpIdx,setProfExpIdx}
     }
    
     const removeItem = (id) => {
-        setProfExp(prev => prev.filter((el) => el.index !== id));         
+        setEdu(prev => prev.filter((el) => el.index !== id));         
     };
     
     function set_temp(idx){
-        let vals=temp;
-        profExpobj.map((obj) => {
+        let vals=temp;  //institution: "",degree: "",startDate:"",endDate:"",region:""
+        eduobj.map((obj) => {
             if (idx == obj["index"]) {
-                vals["compName"]=obj["compName"];
-                vals["positionTitle"]=obj["positionTitle"];
+                vals["institution"]=obj["institution"];
+                vals["degree"]=obj["degree"];
                 vals["startDate"]=obj["startDate"];
                 vals["endDate"]=obj["endDate"];
-                vals["location"]=obj["location"];
-                vals["description"]=obj["description"];
+                vals["region"]=obj["region"];
             }
         });
         setTemp(prev => ({
@@ -171,19 +167,18 @@ export default function ProfExp({profExpobj,setProfExp,profExpIdx,setProfExpIdx}
           }));
     }
     function update_profExp(idx){  
-        profExpobj.map((obj) => {
+        eduobj.map((obj) => {
             if (idx == obj["index"]) {
-                obj["compName"] = temp["compName"];
-                obj["positionTitle"] = temp["positionTitle"];
+                obj["institution"] = temp["institution"];
+                obj["degree"] = temp["degree"];
                 obj["startDate"]=temp["startDate"];
                 obj["endDate"]=temp["endDate"];
-                obj["location"]=temp["location"];
-                obj["description"]=temp["description"];
+                obj["region"]=temp["region"];
             }
         })
-        let changeskills=[...profExpobj]
+        let changeskills=[...eduobj]
         
-        setProfExp(changeskills);
+        setEdu(changeskills);
         setAction(false);
     }
     function render_disp() {
@@ -191,7 +186,7 @@ export default function ProfExp({profExpobj,setProfExp,profExpIdx,setProfExpIdx}
         if (action == false) {
             return (
                 <>
-                    <h1>Professtional Experience</h1>
+                    <h1>Education</h1>
                     {showTitle}
                     {showAdd}
                 </>
@@ -201,7 +196,7 @@ export default function ProfExp({profExpobj,setProfExp,profExpIdx,setProfExpIdx}
 
             return (
                 <>
-                    <h1>Professtional Experience</h1>
+                    <h1>Education</h1>
                     {dispAddBox}
                 </>
             );
@@ -209,7 +204,7 @@ export default function ProfExp({profExpobj,setProfExp,profExpIdx,setProfExpIdx}
         else if (action == "showEdit") {
             return (
                 <>
-                    <h1>Professtional Experience</h1>
+                    <h1>Education</h1>
                     {showEdit}
                 </>
             );
