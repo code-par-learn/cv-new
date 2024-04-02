@@ -1,5 +1,6 @@
 import '../styles/previewSytles.min.css';
 import propstypes from "prop-types";
+
 Preview.propTypes={
     about:propstypes.object,
     skillsobj: propstypes.array,
@@ -35,7 +36,7 @@ export default function Preview({about,skillsobj,profExpobj,eduobj}){
                 return(
                     <div key={crypto.randomUUID()} className='DispSkills'>
                     <p className="dispSkillTitle">{obj["sktitle"]}</p>
-                    <p>{obj["sklist"]}</p>
+                    <p  className='dispsklist'>{obj["sklist"]}</p>
                     </div>  
                     );
         
@@ -90,6 +91,7 @@ export default function Preview({about,skillsobj,profExpobj,eduobj}){
             })
             }
             </div>
+            
         
        </div>
         

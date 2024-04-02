@@ -1,7 +1,8 @@
-import '../styles/index.css';
+import '../styles/index.min.css';
 import Sections from "./Sections";
 import Preview from './Preview';
 import { useState} from 'react';
+import generatePDF from 'react-to-pdf';
 
 export default function Setup(){
     const [about,setAbout]=useState({name:"",email:"",phone:"",linkedin:""});
@@ -14,7 +15,7 @@ export default function Setup(){
     function auto_fill_clear(id){
         if (id=="auto_fill"){
             //modify the about,skills,profExp,edu all to display the default data              
-            let aboutobj={name:"DANI SCHWAIGER",email:"hello@gmail.com",phone:"123-456-7890",linkedin:"dani-schwaiger"}
+            let aboutobj={name:"DANI SCHWAIGER",email:"hello@gmail.com",phone:"123-456-7890",linkedin:"linkedin@dani-schwaiger"}
             
             setAbout(about => ({
                 ...about,
@@ -111,7 +112,10 @@ export default function Setup(){
             setEdu([]);
         }
     }
-   
+    const pdfOptions = {
+        method: "open",
+        filename: 'resume.pdf'
+      };
     return(
         <>
         <h1>CV App</h1>
@@ -131,7 +135,19 @@ export default function Setup(){
         <div  className='previewBox' >
             Preview
             <Preview about={about}  skillsobj={skills} profExpobj={profExp} eduobj={edu}/>
-            
+            <div id="create_pdf_btn">
+                <button id="pdf_btn"
+                onClick={
+                    ()=>{
+                        const pdfTarget =()=>document.getElementById("preview");
+                        const pdfContent = pdfTarget();
+                        pdfContent.classList.add("print-pdf");
+                        generatePDF(pdfTarget, pdfOptions);
+                        pdfContent.classList.remove("print-pdf");
+                    }
+                }
+                >DownloadPDF</button>
+            </div>
             
         </div>
         </div>

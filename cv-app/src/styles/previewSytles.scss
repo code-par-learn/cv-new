@@ -7,8 +7,13 @@
         font-weight: 600;
     
 }
+.print-pdf {
+    width: 600px;
+    padding: 100px;
+    color: black;
+    --text-color: black;
+  }
 
-/* we have to style the preview of disp professional exp for now remainning we will see later */
 div#preview {
     display: flex;
     gap: 20px;
@@ -26,16 +31,22 @@ div#preview {
             display: flex;
             flex-direction: row;
             align-content: center;
-            
-            gap: 25px;
-        }
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 700px;
+            gap:10px;
+        }    
     }
     div#skillsBox {
+        max-width: 700px;
         .DispSkills {
             display: flex;
             gap: 10px;
             .dispSkillTitle{
                 @include fontstyle1();
+            }
+            .dispsklist{
+                flex-wrap: wrap;
             }
         }
 
@@ -44,14 +55,17 @@ div#preview {
         .DispProfExp {
             display: flex;
             flex-direction: column;
+            max-width: 700px;
             .jobInfo {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
+                flex-wrap: wrap;
                 .titleside1 {
                     display: flex;
                     flex-direction: row;
                     gap: 10px;
+                    
                 }
                 .titleside2 {
                     display: flex;
@@ -59,10 +73,10 @@ div#preview {
                     gap: 10px;
                 }
             }
-            .JobDescp {
-                max-width: 439px;
+           .JobDescp {
+            max-width: 600px;
                 margin: 0px;
-            }
+            } 
         }
         
     }
@@ -72,13 +86,14 @@ div#preview {
         .DispEdu {
             display: flex;
             flex-direction: column;
+            
             p{
                 margin:5px;
             }
             .titleside1 {
                 display: flex;
                 align-content: center;
-                
+                flex-wrap: wrap;
                 align-items: center;
             }
             .titleside2 {
@@ -89,5 +104,33 @@ div#preview {
                 gap: 10px;
             }
         }
+    }
+}
+
+/*@media(max-width:1022px) and (max-width:1440px) {
+    .previewBox{
+        max-width: 500px;
+        .jobDescp{
+            max-width: 470px;
+        }
+    }
+    .sections{
+        max-width: 400px;
+    }
+}*/
+@media screen and (max-width:1024px) {
+    .jobDescp{
+        max-width: 470px;
+    }
+}
+
+@media screen and (max-width:769px) {
+    .jobDescp{
+        max-width: 470px;
+    }
+}
+@media only screen and (max-width:480px) {
+    .jobDescp{
+        max-width: 380px;
     }
 }
