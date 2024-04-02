@@ -22,7 +22,12 @@ export default function Preview({about,skillsobj,profExpobj,eduobj}){
             <div key={crypto.randomUUID()} id="info">
            {
             Object.keys(about).map((key, i) => (
-                key=="name" ? null : <p key={key}>{about[key]}</p>
+               
+                <>
+                {key=="linkedin" && about[key].length>0 ? <p key={key}>linkedin@{about[key]}</p> : null}
+                {key=="name" || key=="linkedin" ? null : <p key={key}>{about[key]}</p>}
+                </>
+                
             ))
             }
             </div>

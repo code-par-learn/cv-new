@@ -15,7 +15,7 @@ export default function Setup(){
     function auto_fill_clear(id){
         if (id=="auto_fill"){
             //modify the about,skills,profExp,edu all to display the default data              
-            let aboutobj={name:"DANI SCHWAIGER",email:"hello@gmail.com",phone:"123-456-7890",linkedin:"linkedin@dani-schwaiger"}
+            let aboutobj={name:"DANI SCHWAIGER",email:"hello@gmail.com",phone:"123-456-7890",linkedin:"dani-schwaiger"}
             
             setAbout(about => ({
                 ...about,

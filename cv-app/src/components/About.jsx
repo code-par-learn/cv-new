@@ -7,16 +7,16 @@ About.propTypes={
 
 export default function About({aboutobj,setAbout}){
     //name,email,phone,website,Linkedin,Github,Leetcode
-   
-    const handleChange=(id,val)=>{
-        if(id=="linkedin" && val.length>0){
+   /*if(id=="linkedin" && val.length>0){
            
             aboutobj[id]=`linkedin@${val}`
             
-        }
-        else{
+        } */
+    const handleChange=(id,val)=>{
+        
+       
         aboutobj[id]=val;
-        }
+        
         setAbout(about => ({
             ...about,
             ...aboutobj
