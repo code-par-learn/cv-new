@@ -26,7 +26,7 @@ export default function Sections(props){
     
     return(
         <>
-    
+        <div></div>
         <About aboutobj={props.about} setAbout={props.setAbout} />
         <Skills 
         skillsobj={props.skills}

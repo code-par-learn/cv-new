@@ -122,8 +122,10 @@ export default function Setup(){
         <div  className='cv-container'>
         <div  className='sections'>
             Sections
+            <div>
             <button id="auto_fill" onClick={(e)=>{ auto_fill_clear(e.target.id)}}>Auto fill</button>
             <button id="clear" onClick={(e)=>{ auto_fill_clear(e.target.id)}}>Clear</button>
+            </div>
            <Sections about={about} setAbout={setAbout}  
                      skills={skills} setSkills={setSkills}
                      skillIdx={skillIdx} setSkillIdx={setSkillIdx} 
