@@ -7,13 +7,7 @@ About.propTypes={
 }
 
 export default function About({aboutobj,setAbout}){
-    //name,email,phone,website,Linkedin,Github,Leetcode
-   /*if(id=="linkedin" && val.length>0){
-           
-            aboutobj[id]=`linkedin@${val}`
-            
-        } */
-       
+    
     const handleChange=(id,val)=>{
         
        
@@ -23,8 +17,8 @@ export default function About({aboutobj,setAbout}){
             ...about,
             ...aboutobj
           }));
-    }   //inside the return here we have to return the input fields and their labels which we can do by a function 
-        //{name:"",email:"",phone:"",website:"",linkedin:"",github:"",leetcode:""}
+    }   
+       
    
     function Generatefields({inputs}){
         return(

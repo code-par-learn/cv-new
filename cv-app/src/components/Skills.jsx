@@ -75,14 +75,7 @@ export default function Skills({ skillsobj, setSkills ,skillIdx,setSkillIdx }) {
 
     function update_showtitle(skills) {
         setShowTitle([]);
-        /*
-            display: flex;
-    gap: 10px; 
-    min-height: 80px;
-    flex-direction: column;
-    justify-content: space-between;
-
-        */
+        
         if (skills.length>0){
         skillsobj.forEach((obj) => {
             let disp=(<div key={crypto.randomUUID()} className="skillDisplay disp_spacing">
@@ -170,7 +163,7 @@ export default function Skills({ skillsobj, setSkills ,skillIdx,setSkillIdx }) {
           }));
     }
     const update_temp=(id,val)=>{
-        // iam changing the set_temp to be called inside 
+       
         // the edit function itself avoid duplication while updating
         let vals=temp;
         vals[id]=val;
@@ -192,8 +185,6 @@ export default function Skills({ skillsobj, setSkills ,skillIdx,setSkillIdx }) {
         setAction(false);
     }
     function render_disp() {
-       //condition ? <expression if true> : <expression if false>
-       //<button className=".btn_dark group relative flex w-full items-center rounded-none border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-zinc-700 dark:text-white [&:not([data-twe-collapse-collapsed])]:bg-white [&:not([data-twe-collapse-collapsed])]:text-primary [&:not([data-twe-collapse-collapsed])]:shadow-border-b dark:[&:not([data-twe-collapse-collapsed])]:bg-surface-dark dark:[&:not([data-twe-collapse-collapsed])]:text-primary dark:[&:not([data-twe-collapse-collapsed])]:shadow-white/10 " type="button" data-twe-collapse-init data-twe-collapse-collapsed data-twe-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
        
        return(
         <div className="rounded-none border border-e-0 border-s-0 border-t-0 border-neutral-200 bg-white dark:border-neutral-600 dark:bg-body-dark">

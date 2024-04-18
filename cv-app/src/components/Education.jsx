@@ -31,7 +31,7 @@ export default function Education({eduobj,setEdu,eduIdx,setEduIdx}){
 
        }, [eduobj]);
 
-       //institution: "",degree: "",startDate:"",endDate:"",region:""
+      
        function handleAdd() {
        
         let addnew = {
@@ -67,7 +67,7 @@ export default function Education({eduobj,setEdu,eduIdx,setEduIdx}){
     function update_showtitle(skills) {
         setShowTitle([]);
         if (skills.length>0){
-            //institution: "",degree: "",startDate:"",endDate:"",region:""
+           
         eduobj.forEach((obj) => {
             let disp=(<div key={crypto.randomUUID()} className="skillDisplay disp_spacing">
             
@@ -90,7 +90,7 @@ export default function Education({eduobj,setEdu,eduIdx,setEduIdx}){
     }
 
     function open_addIp(idx) {
-        //institution: "",degree: "",startDate:"",endDate:"",region:"" //institution: "",degree: "",startDate:"",endDate:"",region:""
+  
         setDispAddBox((prev) => {
             let newele = eduobj.map((obj) => {
                 if (idx == obj["index"]) {
@@ -119,7 +119,7 @@ export default function Education({eduobj,setEdu,eduIdx,setEduIdx}){
 
     }
     function edit_profExp(idx) {
-        setAction("showEdit");                                                  //institution: "",degree: "",startDate:"",endDate:"",region:""
+        setAction("showEdit");                                                  
         let dispedit=eduobj.map((obj) => {
             if (idx == obj["index"]) {
                 return (
@@ -147,7 +147,7 @@ export default function Education({eduobj,setEdu,eduIdx,setEduIdx}){
     };
     
     function set_temp(idx){
-        let vals=temp;  //institution: "",degree: "",startDate:"",endDate:"",region:""
+        let vals=temp;  
         eduobj.map((obj) => {
             if (idx == obj["index"]) {
                 vals["institution"]=obj["institution"];
@@ -163,8 +163,7 @@ export default function Education({eduobj,setEdu,eduIdx,setEduIdx}){
           }));
     }
     const update_temp=(id,val)=>{
-        // iam changing the set_temp to be called inside 
-        // the edit function itself avoid duplication while updating
+      
         let vals=temp;
         vals[id]=val;
         setTemp(prev => ({

@@ -121,8 +121,7 @@ export default function Setup(){
         filename: 'resume.pdf'
       };
     return(
-        //<button id="auto_fill" onClick={(e)=>{ auto_fill_clear(e.target.id)}}>Auto fill</button>
-        //<button id="clear" onClick={(e)=>{ auto_fill_clear(e.target.id)}}>Clear</button>
+       
         <>
         <div className='flex justify-center items-center'>
             <h1 className='self-center mb-4 text-3xl font-extrabold  md:text-5xl lg:text-5xl text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400 mt-7'>Resume Crafter</h1>

@@ -1,13 +1,6 @@
-
-
 @mixin fontstyle1 {
-   
-        
-        font-family: monospace;
-        
-    
+        font-family: monospace;    
 }
-
 
 div#preview {
     display: flex;
@@ -91,7 +84,6 @@ div#preview {
             .titleside2 {
                 display: flex;
                 align-content: center;
-                /* justify-content: center; */
                 align-items: center;
                 gap: 10px;
             }
@@ -99,17 +91,6 @@ div#preview {
     }
 }
 
-/*@media(max-width:1022px) and (max-width:1440px) {
-    .previewBox{
-        max-width: 500px;
-        .jobDescp{
-            max-width: 470px;
-        }
-    }
-    .sections{
-        max-width: 400px;
-    }
-}*/
 @media screen and (max-width:1024px) {
     .jobDescp{
         max-width: 470px;

@@ -168,7 +168,6 @@ export default function ProfExp({profExpobj,setProfExp,profExpIdx,setProfExpIdx}
           }));
     }
     const update_temp=(id,val)=>{
-        // iam changing the set_temp to be called inside 
         // the edit function itself avoid duplication while updating
         let vals=temp;
         vals[id]=val;

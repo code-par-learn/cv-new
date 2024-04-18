@@ -26,7 +26,7 @@ Sections.propTypes={
     eduIdx:propstypes.number,
     setEduIdx:propstypes.func,
 }
-//{about,setAbout,skillIdx,setSkillIdx,skills,setSkills, profExp, setProfExp,edu,setEdu}
+
 export default function Sections(props){
     
     useEffect(() => {
