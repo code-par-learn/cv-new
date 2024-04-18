@@ -36,9 +36,7 @@ h5{
 .disp_spacing{
     @apply flex justify-between gap-3
 }
-.disp_btn_spacing{
-    
-}
+
 .print-pdf{
     @apply px-20 bg-white text-black w-4/5
 }
