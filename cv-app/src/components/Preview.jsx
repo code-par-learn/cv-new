@@ -14,11 +14,11 @@ export default function Preview({about,skillsobj,profExpobj,eduobj}){
     
     return(
         
-        <div key={crypto.randomUUID()} id="preview">
+        <div key={crypto.randomUUID()} className='text-gray-800 text-lg dark:text-white dark:bg-zinc-800' id="preview">
         
            <div key={crypto.randomUUID()} id="aboutBox">
            <div key={crypto.randomUUID()} id="aboutIn">
-            <h1>{about["name"]}</h1>
+            <h1 className='text-4xl font-bold mb-3.5'>{about["name"]}</h1>
             <div key={crypto.randomUUID()} id="info">
            {
             Object.keys(about).map((key, i) => (
@@ -35,29 +35,32 @@ export default function Preview({about,skillsobj,profExpobj,eduobj}){
             </div>
     
             <div key={crypto.randomUUID()} id="skillsBox">
-            <h5>Skills</h5>
+            <h5 className='text-2xl font-bold mb-3.5'>Skills</h5>
+            <div className='pl-4'>
             {
             skillsobj.map((obj) => {
                 return(
                     <div key={crypto.randomUUID()} className='DispSkills'>
-                    <p className="dispSkillTitle">{obj["sktitle"]}</p>
-                    <p  className='dispsklist'>{obj["sklist"]}</p>
+                    <p  className=" text-xl font-semibold dispSkillTitle">{obj["sktitle"]}</p>
+                    <p  className=' text-lg dispsklist'>{obj["sklist"]}</p>
                     </div>  
                     );
         
             })
             }
             </div>
+            </div>
         
         
         
             <div key={crypto.randomUUID()} id="profExpBox">
-            <h5>Professional Experience</h5>
+            <h5 className='text-2xl font-bold mb-3.5'>Professional Experience</h5>
+            <div className='pl-4'>
             {
             profExpobj.map((obj) => {
                 return(
-                    <div key={crypto.randomUUID()} className='DispProfExp'>
-                    <div className='jobInfo'>
+                    <div key={crypto.randomUUID()} className=' mb-3.5 DispProfExp'>
+                    <div className='jobInfo mb-2.5'>
                         <div className='titleside1'>
                         <p className='posTitle'>{obj["positionTitle"]} , </p>
                         <p className='companyName'>{obj["compName"]}</p>
@@ -74,9 +77,11 @@ export default function Preview({about,skillsobj,profExpobj,eduobj}){
             })
             }
             </div>
+            </div>
 
             <div key={crypto.randomUUID()} id="eduBox">
-            <h5>Education</h5> 
+            <h5 className='text-2xl font-bold mb-3.5'>Education</h5> 
+            <div className='pl-4'>
             {
             eduobj.map((obj) => {
                 return(
@@ -95,6 +100,7 @@ export default function Preview({about,skillsobj,profExpobj,eduobj}){
         
             })
             }
+            </div>
             </div>
             
         

@@ -3,6 +3,8 @@ import Sections from "./Sections";
 import Preview from './Preview';
 import { useState} from 'react';
 import generatePDF from 'react-to-pdf';
+import Switcher from "./Switcher";
+import { FaPenToSquare } from "react-icons/fa6";
 
 export default function Setup(){
     const [about,setAbout]=useState({name:"",email:"",phone:"",linkedin:""});
@@ -73,7 +75,7 @@ export default function Setup(){
                         startDate:"06/2023",
                         endDate:"09/2023",
                         location:" Bengaluru, India",
-                        description:"A seasoned Backend Developer, I excel in designing resilient APIs and effectively integrating AWS services, MongoDB, and Cassandra for secure data management •My commitment to industry best practices and system optimization has played a pivotal role in driving Apnakonnect's growth and success.",
+                        description:"A seasoned Backend Developer, I excel in designing resilient APIs and effectively integrating AWS services, MongoDB, and Cassandra for secure data management My commitment to industry best practices and system optimization has played a pivotal role in driving Apnakonnect's growth and success.",
                         id: crypto.randomUUID(),
                         index:crypto.randomUUID()}
             ]
@@ -117,28 +119,43 @@ export default function Setup(){
         filename: 'resume.pdf'
       };
     return(
+        //<button id="auto_fill" onClick={(e)=>{ auto_fill_clear(e.target.id)}}>Auto fill</button>
+        //<button id="clear" onClick={(e)=>{ auto_fill_clear(e.target.id)}}>Clear</button>
         <>
-        <h1>CV App</h1>
-        <div  className='cv-container'>
-        <div  className='sections'>
-            Sections
-            <div>
-            <button id="auto_fill" onClick={(e)=>{ auto_fill_clear(e.target.id)}}>Auto fill</button>
-            <button id="clear" onClick={(e)=>{ auto_fill_clear(e.target.id)}}>Clear</button>
+        <div className='flex justify-center items-center'>
+            <h1 className='self-center mb-4 text-3xl font-extrabold  md:text-5xl lg:text-5xl text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400'> CV APP</h1>
+        </div>
+        <div  className='  cv-container'>
+        <div  className='sections rounded-md dark:border-gray-950 border-gray-400  p-4  dark:text-white dark:bg-zinc-800'>
+           
+            <div className='justify-between inline-flex'>
+                <Switcher />
+            <div className='flex'>
+            <button id="auto_fill" onClick={(e)=>{ auto_fill_clear(e.target.id)}} className="flex gap-2 py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-slate-100 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+            <FaPenToSquare />Auto fill
+                </button>
+                <button id="clear" onClick={(e)=>{ auto_fill_clear(e.target.id)}} className="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-slate-100 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                Clear
+                </button>
+                </div>
+        
             </div>
-           <Sections about={about} setAbout={setAbout}  
+            <div className='hgsection  dark:border-neutral-950 dark:text-white dark:bg-zinc-700'>
+           <Sections  about={about} setAbout={setAbout}  
                      skills={skills} setSkills={setSkills}
                      skillIdx={skillIdx} setSkillIdx={setSkillIdx} 
                      profExp={profExp} setProfExp={setProfExp}
                      profExpIdx={profExpIdx} setProfExpIdx={setProfExpIdx}
                      edu={edu}        setEdu={setEdu}
                      eduIdx={eduIdx} setEduIdx={setEduIdx}/>
+            </div>
         </div>
-        <div  className='previewBox' >
-            Preview
+        <div  className='previewBox rounded-md dark:border-gray-950 border-gray-400 dark:text-white dark:bg-zinc-800' >
+            <div><p className='hp flex justify-center'>Preview</p></div>
             <Preview about={about}  skillsobj={skills} profExpobj={profExp} eduobj={edu}/>
-            <div id="create_pdf_btn">
+            <div id="create_pdf_btn" className='justify-end flex'>
                 <button id="pdf_btn"
+                className='py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-slate-100 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
                 onClick={
                     ()=>{
                         const pdfTarget =()=>document.getElementById("preview");

@@ -5,6 +5,11 @@ import propstypes from "prop-types";
 import Skills from "./Skills";
 import ProfExp from "./ProfExp";
 import Education from "./Education";
+import {
+    Collapse,
+    initTWE,
+  } from "tw-elements";
+  import { useEffect } from 'react';
 Sections.propTypes={
     about:propstypes.object,
     setAbout:propstypes.func,
@@ -24,9 +29,14 @@ Sections.propTypes={
 //{about,setAbout,skillIdx,setSkillIdx,skills,setSkills, profExp, setProfExp,edu,setEdu}
 export default function Sections(props){
     
+    useEffect(() => {
+        initTWE({ Collapse });
+      }, []);
+      
+    
     return(
-        <>
-        <div></div>
+        <div className="text-gray-800 shadow-inner  dark:border-neutral-950 dark:text-white dark:bg-zinc-700 "  id="accordionFlushExample">
+        
         <About aboutobj={props.about} setAbout={props.setAbout} />
         <Skills 
         skillsobj={props.skills}
@@ -37,6 +47,6 @@ export default function Sections(props){
                   profExpIdx={props.profExpIdx}  setProfExpIdx={props.setProfExpIdx}/>
         <Education eduobj={props.edu} setEdu={props.setEdu}
                    eduIdx={props.eduIdx} setEduIdx={props.setEduIdx} />
-      </>
+      </div>
     );
 }
