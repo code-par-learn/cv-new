@@ -6,6 +6,8 @@ import generatePDF from 'react-to-pdf';
 import Switcher from "./Switcher";
 import { FaPenToSquare } from "react-icons/fa6";
 
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { MdDownload } from "react-icons/md";
 export default function Setup(){
     const [about,setAbout]=useState({name:"",email:"",phone:"",linkedin:""});
     const [skills,setSkills]=useState([]);
@@ -123,19 +125,19 @@ export default function Setup(){
         //<button id="clear" onClick={(e)=>{ auto_fill_clear(e.target.id)}}>Clear</button>
         <>
         <div className='flex justify-center items-center'>
-            <h1 className='self-center mb-4 text-3xl font-extrabold  md:text-5xl lg:text-5xl text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400'> CV APP</h1>
+            <h1 className='self-center mb-4 text-3xl font-extrabold  md:text-5xl lg:text-5xl text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400 mt-7'>Resume Crafter</h1>
         </div>
         <div  className='  cv-container'>
         <div  className='sections rounded-md dark:border-gray-950 border-gray-400  p-4  dark:text-white dark:bg-zinc-800'>
            
-            <div className='justify-between inline-flex'>
+            <div className='gap-2 justify-between inline-flex'>
                 <Switcher />
             <div className='flex'>
-            <button id="auto_fill" onClick={(e)=>{ auto_fill_clear(e.target.id)}} className="flex gap-2 py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-slate-100 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-            <FaPenToSquare />Auto fill
+            <button id="auto_fill" onClick={(e)=>{ auto_fill_clear(e.target.id)}} className="flex items-center gap-2 py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-slate-100 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+            <FaPenToSquare style={{ fontSize: '18px' }}/>Auto fill
                 </button>
-                <button id="clear" onClick={(e)=>{ auto_fill_clear(e.target.id)}} className="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-slate-100 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                Clear
+                <button id="clear" onClick={(e)=>{ auto_fill_clear(e.target.id)}} className="flex items-center gap-2 py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-slate-100 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                <RiDeleteBin6Line style={{ fontSize: '18px' }} />Clear
                 </button>
                 </div>
         
@@ -155,7 +157,7 @@ export default function Setup(){
             <Preview about={about}  skillsobj={skills} profExpobj={profExp} eduobj={edu}/>
             <div id="create_pdf_btn" className='justify-end flex'>
                 <button id="pdf_btn"
-                className='py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-slate-100 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
+                className='flex items-center gap-2 py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-slate-100 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
                 onClick={
                     ()=>{
                         const pdfTarget =()=>document.getElementById("preview");
@@ -165,7 +167,7 @@ export default function Setup(){
                         pdfContent.classList.remove("print-pdf");
                     }
                 }
-                >DownloadPDF</button>
+                ><MdDownload style={{ fontSize: '24px' }} /> DownloadPDF</button>
             </div>
             
         </div>
