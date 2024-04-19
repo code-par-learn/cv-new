@@ -1,11 +1,16 @@
 # Resume Crafter
 
-<p>The Resume Crafter is designed to craft and manage your professional resume effortlessly. It features a live preview, and supports PDF generation for convenient sharing.</p>
-<p>The application supports light/dark themes for an improved user experience.</p> 
-<p>it also provides auto fill options for a quick overview of the resume template</p>
-<p>Edit your resume on-the-go with the interactive and dynamic ux</p>
+<p>The Resume Crafter is designed to craft and manage your professional resume effortlessly. <p/>
+<h4> 🔗 𝙃𝙚𝙧𝙚 𝙞𝙨 𝙩𝙝𝙚 𝙡𝙞𝙣𝙠 𝙩𝙤 Live demo , check it out!  😇-> : https://cv-new-chi.vercel.app </h4>
 
-🔗<h4> 𝙃𝙚𝙧𝙚 𝙞𝙨 𝙩𝙝𝙚 𝙡𝙞𝙣𝙠 𝙩𝙤 Live demo , check it out! </h4> 😇-> : https://cv-new-chi.vercel.app
+
+<h2>✅ Key features </h2>
+<ul>
+  <li>📄 It features a live preview, and supports PDF generation for convenient sharing.</li>
+  <li>The application supports ☀️ light/ 🌑 dark themes for an improved user experience.</li>
+  <li>it also provides 📝 auto fill options for a quick overview of the resume template</li>
+  <li>Edit 🖋️ your resume on-the-go with the interactive and dynamic ux</li>
+</ul>
 
 <h2>💡 Skills</h2>
 <ul>
