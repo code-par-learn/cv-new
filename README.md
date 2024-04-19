@@ -1,6 +1,6 @@
 # Resume Crafter
 
-<p>The Resume Crafter is designed for creating resumes . It features a live preview, and supports PDF generation for convenient sharing.</p>
+<p>The Resume Crafter is designed to craft and manage your professional resume effortlessly. It features a live preview, and supports PDF generation for convenient sharing.</p>
 <p>The application supports light/dark themes for an improved user experience.</p> 
 <p>it also provides auto fill options for a quick overview of the resume template</p>
 <p>Edit your resume on-the-go with the interactive and dynamic ux</p>
